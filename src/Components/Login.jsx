@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { MdLock } from "react-icons/md";
 import "../Styles/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const navigate = useNavigate()
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -27,7 +28,11 @@ const Login = () => {
         if (response.status === 200) {
           localStorage.setItem("user", JSON.stringify(response.data));
           toast.success(response.data.message);
-        }
+          setTimeout(()=>{
+
+            navigate('/userData')
+          },2000)
+          }
       }
     } catch (error) {
       toast.error(error.response.error);
@@ -40,7 +45,7 @@ const Login = () => {
         style={{ height: "730px", backgroundColor: "#00848E" }}
       >
         <div className="card border-0 " style={{ width: "350px" }}>
-          <div  className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center" >
+          <div onClick={()=>navigate('/')}  className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center" >
             SIGN IN
           </div>
           <div className="card-body " style={{ backgroundColor: "#1D2C4F" }}>
@@ -49,7 +54,7 @@ const Login = () => {
                 className="rounded-circle mt-5 bg-secondary d-flex justify-content-center align-items-center"
                 style={{ width: "80px", height: "80px", margin: "auto" }}
               >
-                <FaRegUser style={{ fontSize: "2rem", color: "#fff" }} />
+                <FaRegUser type="file" style={{ fontSize: "2rem", color: "#fff" }} />
               </div>
             </div>
             <form onSubmit={loginUser}>

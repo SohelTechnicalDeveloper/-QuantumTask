@@ -1,5 +1,12 @@
-.App{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+
+.sub-list{
+    font-size: 18px;
+    color: #000;
+    font-weight: 600 !important;
+}
+.sub-list .active{
+   background-color: #00AAF7!important;
+    color: #fff !important;
+    font-weight: 600;
 }

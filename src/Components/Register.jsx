@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -16,13 +16,13 @@ const Register = () => {
   const registerUser = async (e) => {
     e.preventDefault();
 
-    //make a check for  user input is empty 
+    //make a check for  user input is empty
 
     if (!name && !date_birth && !email && !password) {
       setError(true);
     }
     try {
-      //this is register api for user 
+      //this is register api for user
       const response = await axios.post(`http://localhost:4000/user/register`, {
         Name: name,
         Date_birth: date_birth,
@@ -30,11 +30,10 @@ const Register = () => {
         Password: password,
       });
       if (response.status === 201) {
-        console.log(response.data.message);
         setTimeout(() => {
-          toast.success(response.data.message);
+          toast.success("User Registration Succesful");
           navigate("/login");
-        }, 2000);
+        }, 3000);
       }
     } catch (error) {
       console.log(error.response.error);
@@ -48,7 +47,10 @@ const Register = () => {
         style={{ height: "730px", backgroundColor: "#00848E" }}
       >
         <div className="card border-0 " style={{ width: "350px" }}>
-          <div className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center" onClick={()=>navigate('/login')} >
+          <div
+            className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center"
+            onClick={() => navigate("/login")}
+          >
             Login
           </div>
           <div className="card-body " style={{ backgroundColor: "#1D2C4F" }}>
@@ -77,7 +79,7 @@ const Register = () => {
                   </label>
                 ) : (
                   ""
-                )}   
+                )}
               </div>
               <div className="form-group mb-4">
                 <input
@@ -133,32 +135,17 @@ const Register = () => {
                   ""
                 )}
               </div>
-              {/* this footer my register bar */}
-              <div className="d-flex justify-content-between align-items-center mb-5">
-                <div style={{ color: "#00F5E1" }}>
-                  <input
-                    type="checkbox"
-                    id="remember"
-                    style={{ backgroundColor: "#00F5E1" }}
-                  />
-                  <label htmlFor="remember" className=" ms-2">
-                    Remember me
-                  </label>
-                </div>
-                <Link
-                  href="#"
-                  style={{ color: "#00F5E1", textDecoration: "none" }}
+             
+              <div className="mt-5">
+                <button
+                  className="btn btn-primary text-black-50 fw-bolder w-100 border-0 mb-3"
+                  style={{ backgroundColor: "#00F5E1" }}
                 >
-                  Forgot your password?
-                </Link>
-              </div>
+                  Register here
+                </button>
               <ToastContainer />
-              <button
-                className="btn btn-primary text-black-50 fw-bolder w-100 border-0 mb-3"
-                style={{ backgroundColor: "#00F5E1" }}
-              >
-                Register here
-              </button>
+
+              </div>
             </form>
           </div>
         </div>
