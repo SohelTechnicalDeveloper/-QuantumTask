@@ -6,19 +6,29 @@ import imge1 from "../Image/download.png";
 import { Link } from "react-router-dom";
 import { TbPointFilled } from "react-icons/tb";
 
-
 const UsersData = () => {
   const [usersData, setUsersData] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(5);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const baseUrl = process.env.REACT_APP_BASE_URL; // env file  react base url for this security purpose
+  console.log("Base URL:", process.env.REACT_APP_BASE_URL);
+  console.log(baseUrl);
+
+  const token = JSON.parse(localStorage.getItem("user")); //get token after user is see all users Data
 
   // get all users data in this api
 
   const getAllUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/user/getAllUser`);
+      const response = await axios.get(
+        `http://localhost:4000/user/getAllUser`,
+        {
+          headers: {
+            Authorization: `Bearer ${token.token}`,
+          },
+        }
+      );
       if (response.status === 200) {
         setUsersData(response.data.data);
       }
@@ -27,19 +37,19 @@ const UsersData = () => {
     }
   };
 
-  const handleDelete = ()=>{
-    window.confirm('Are Sure Want To Delete This User')
-  }
+  const handleDelete = () => {
+    window.confirm("Are Sure Want To Delete This User");
+  };
 
   useEffect(() => {
     getAllUsers();
   }, []);
 
   return (
-    <div className="bg-body-secondary">
+    <div style={{ backgroundColor: "#00848E" }}>
       <div className="p-5 shadow-lg">
-        <div className="table-responsive rounded-3  mt-2">
-          <table className="table p-3" style={{ minWidth: "1500px" }}>
+        <div className="table-responsive  mt-2 p-3">
+          <table className="table  rounded-4" style={{ minWidth: "1500px" }}>
             <thead className=" text-center">
               <tr className="fw-bold">
                 <th>#</th>
@@ -58,13 +68,21 @@ const UsersData = () => {
                     <td>{item.Name}</td>
                     <td>{item.Date_birth}</td>
                     <td>Admin</td>
-                    <td><TbPointFilled className="text-success"/> Active</td>
+                    <td>
+                      <TbPointFilled className="text-success" /> Active
+                    </td>
                     <td>
                       <IoMdSettings
                         style={{ color: "#3CA2F7", fontSize: "25px" }}
                       />{" "}
                       &nbsp;&nbsp;
-                      <img src={imge1} height={20} alt=""  onClick={()=>handleDelete()} style={{cursor:"pointer"}}/>
+                      <img
+                        src={imge1}
+                        height={20}
+                        alt=""
+                        onClick={() => handleDelete()}
+                        style={{ cursor: "pointer" }}
+                      />
                     </td>
                   </tr>
                 );

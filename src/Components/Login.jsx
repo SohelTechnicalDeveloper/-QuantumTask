@@ -26,6 +26,7 @@ const Login = () => {
           Password: password,
         });
         if (response.status === 200) {
+          
           localStorage.setItem("user", JSON.stringify(response.data));
           toast.success(response.data.message);
           setTimeout(()=>{
@@ -44,11 +45,11 @@ const Login = () => {
         className="d-flex justify-content-center align-items-center"
         style={{ height: "730px", backgroundColor: "#00848E" }}
       >
-        <div className="card border-0 " style={{ width: "350px" }}>
+        <div className="card   shadow " style={{backgroundColor: "#1D2C4F", width: "350px",borderRadius:"15px" }}>
           <div onClick={()=>navigate('/')}  className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center" >
             SIGN IN
           </div>
-          <div className="card-body " style={{ backgroundColor: "#1D2C4F" }}>
+          <div className="card-body ">
             <div className="text-center mb-4">
               <div
                 className="rounded-circle mt-5 bg-secondary d-flex justify-content-center align-items-center"

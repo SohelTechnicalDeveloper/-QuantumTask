@@ -46,14 +46,14 @@ const Register = () => {
         className="d-flex justify-content-center align-items-center"
         style={{ height: "730px", backgroundColor: "#00848E" }}
       >
-        <div className="card border-0 " style={{ width: "350px" }}>
+        <div className="card border-0 " style={{backgroundColor: "#1D2C4F", width: "350px",borderRadius:"15px" }}>
           <div
             className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center"
             onClick={() => navigate("/login")}
           >
             Login
           </div>
-          <div className="card-body " style={{ backgroundColor: "#1D2C4F" }}>
+          <div className="card-body " >
             <div className="text-center mb-4">
               <div
                 className="rounded-circle mt-5 bg-secondary d-flex justify-content-center align-items-center"
@@ -63,7 +63,7 @@ const Register = () => {
               </div>
             </div>
             <form onSubmit={registerUser}>
-              <div className="form-group mb-4">
+              <div className=" mb-4">
                 <input
                   type="text"
                   className="form-control input-color  text-bg-secondary bg-secondary "
