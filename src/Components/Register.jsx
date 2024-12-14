@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -29,14 +29,16 @@ const Register = () => {
         Email: email,
         Password: password,
       });
+      console.log(response);
+
       if (response.status === 201) {
         setTimeout(() => {
-          toast.success("User Registration Succesful");
+          toast.success(response.data.message);
           navigate("/login");
-        }, 3000);
+        }, 2000);
       }
     } catch (error) {
-      console.log(error.response.error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -46,14 +48,21 @@ const Register = () => {
         className="d-flex justify-content-center align-items-center"
         style={{ height: "730px", backgroundColor: "#00848E" }}
       >
-        <div className="card border-0 " style={{backgroundColor: "#1D2C4F", width: "350px",borderRadius:"15px" }}>
+        <div
+          className="card border-0 shadow"
+          style={{
+            backgroundColor: "#1D2C4F",
+            width: "350px",
+            borderRadius: "15px",
+          }}
+        >
           <div
             className="d-flex login-signin  justify-content-center position-absolute align-items-center card-header w-50  text-center"
             onClick={() => navigate("/login")}
           >
             Login
           </div>
-          <div className="card-body " >
+          <div className="card-body ">
             <div className="text-center mb-4">
               <div
                 className="rounded-circle mt-5 bg-secondary d-flex justify-content-center align-items-center"
@@ -135,7 +144,7 @@ const Register = () => {
                   ""
                 )}
               </div>
-             
+
               <div className="mt-5">
                 <button
                   className="btn btn-primary text-black-50 fw-bolder w-100 border-0 mb-3"
@@ -143,8 +152,7 @@ const Register = () => {
                 >
                   Register here
                 </button>
-              <ToastContainer />
-
+                <ToastContainer />
               </div>
             </form>
           </div>

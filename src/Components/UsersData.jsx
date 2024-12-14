@@ -48,11 +48,15 @@ const UsersData = () => {
   return (
     <div style={{ backgroundColor: "#00848E" }}>
       <div className="p-5 shadow-lg">
+
+      <div className="text-center fs-3  text-white fw-bold">
+        <p>Users Table </p>
+      </div>
         <div className="table-responsive  mt-2 p-3">
           <table className="table  rounded-4" style={{ minWidth: "1500px" }}>
-            <thead className=" text-center">
-              <tr className="fw-bold">
-                <th>#</th>
+            <thead className=" text-center " >
+              <tr className="fw-bold table-primary" >
+                <th >#</th>
                 <th>Name</th>
                 <th>Date Created</th>
                 <th>Role</th>
@@ -64,14 +68,15 @@ const UsersData = () => {
               {usersData.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.Name}</td>
-                    <td>{item.Date_birth}</td>
-                    <td>Admin</td>
-                    <td>
+                    <td style={{color:"#6E7D99"}}>{index + 1}</td>
+                    <td style={{color:"#6E7D99"}}>{item.Name.charAt(0).toUpperCase() +
+                        item.Name.slice(1)}</td>
+                    <td style={{color:"#6E7D99"}}>{item.Date_birth}</td>
+                    <td style={{color:"#6E7D99"}}>Admin</td>
+                    <td style={{color:"#6E7D99"}}>
                       <TbPointFilled className="text-success" /> Active
                     </td>
-                    <td>
+                    <td style={{color:"#6E7D99"}}>
                       <IoMdSettings
                         style={{ color: "#3CA2F7", fontSize: "25px" }}
                       />{" "}
